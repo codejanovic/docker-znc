@@ -5,7 +5,7 @@ MAINTAINER Jim Myhrberg "contact@jimeh.me"
 
 ENV ZNC_VERSION 1.6.1
 
-RUN apt-get update \
+RUN mkdir /znc-data && apt-get update \
     && apt-get install -y sudo wget build-essential libssl-dev libperl-dev \
                pkg-config swig3.0 libicu-dev ca-certificates \
     && mkdir -p /src \
@@ -26,7 +26,7 @@ ADD docker-entrypoint.sh /entrypoint.sh
 ADD znc.conf.default /znc.conf.default
 RUN chmod 644 /znc.conf.default
 
-VOLUME /znc-data
+# VOLUME /znc-data
 
 EXPOSE 6667
 ENTRYPOINT ["/entrypoint.sh"]
